@@ -1,0 +1,45 @@
+<div class="relative overflow-x-auto">
+    <table class="w-full text-sm text-left rtl:text-right text-gray-500">
+        <thead class="text-xs text-gray-700 uppercase bg-gray-50">
+            <tr>
+                <th scope="col" class="px-6 py-3">
+                    Nombre
+                </th>
+                <th scope="col" class="px-6 py-3">
+                    Apellido
+                </th>
+                <th scope="col" class="px-6 py-3">
+                    Fecha Nacimiento
+                </th>
+                <th scope="col" class="px-6 py-3">
+                    Dirección
+                </th>
+                <th scope="col" class="px-6 py-3">
+                    Opción
+                </th>
+            </tr>
+        </thead>
+        <tbody>
+            @for (person of persons; track $index) {
+                <tr class="bg-white border-b">
+                    <th scope="row" class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap">
+                        {{person.name}}
+                    </th>
+                    <td class="px-6 py-4">
+                        {{person.lastname}}
+                    </td>
+                    <td class="px-6 py-4">
+                        {{person.birthday | date: 'dd/MM/yyyy'}}
+                    </td>
+                    <td class="px-6 py-4">
+                        {{person.address}}
+                    </td>
+                    <td class="px-6 py-4">
+                        <button type="button" class="px-4 py-2.5 bg-orange-700 text-white border rounded-lg mx-4">Actualizar</button>
+                        <button type="button" class="px-4 py-2.5 bg-red-700 text-white border rounded-lg">Eliminar</button>
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+</div>
