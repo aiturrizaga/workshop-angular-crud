@@ -31,7 +31,13 @@ export const routes: Routes = [
     },
     {
         path: 'customer',
-        component: CustomerLayoutComponent
+        component: CustomerLayoutComponent,
+        children: [
+            {
+                path: 'dashboard',
+                component: HomeDashboardComponent
+            }
+        ]
     },
     {
         path: '',
