@@ -1,3 +1,8 @@
+<div class="w-full flex justify-between px-4 pb-6">
+    <h1 class="text-2xl font-medium">Personas</h1>
+    <button type="button" (click)="navigateRegisterPerson()" class="px-4 py-2.5 bg-black text-white rounded-lg">Agregar</button>
+</div>
+
 <div class="relative overflow-x-auto">
     <table class="w-full text-sm text-left rtl:text-right text-gray-500">
         <thead class="text-xs text-gray-700 uppercase bg-gray-50">
@@ -36,7 +41,7 @@
                     </td>
                     <td class="px-6 py-4">
                         <button type="button" class="px-4 py-2.5 bg-orange-700 text-white border rounded-lg mx-4">Actualizar</button>
-                        <button type="button" class="px-4 py-2.5 bg-red-700 text-white border rounded-lg">Eliminar</button>
+                        <button type="button" (click)="deletePerson(person.id)" class="px-4 py-2.5 bg-red-700 text-white border rounded-lg">Eliminar</button>
                     </td>
                 </tr>
             }

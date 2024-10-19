@@ -10,11 +10,19 @@ export class PersonService {
   private http = inject(HttpClient);
 
   findAll() {
-    return this.http.get<Person[]>('http://localhost:8085/oraclecloud/v1/persons');
+    return this.http.get<Person[]>('https://9lk3jtqj-8085.brs.devtunnels.ms/oraclecloud/v1/persons');
   }
 
   create(person: Person) {
-    return this.http.post<Person>('http://localhost:8085/oraclecloud/v1/persons', person);
+    return this.http.post<Person>('https://9lk3jtqj-8085.brs.devtunnels.ms/oraclecloud/v1/persons', person);
+  }
+
+  update(id: string, person: Person) {
+    return this.http.put<Person>('https://9lk3jtqj-8085.brs.devtunnels.ms/oraclecloud/v1/persons/' + id, person);
+  }
+
+  delete(id: string) {
+    return this.http.delete('https://9lk3jtqj-8085.brs.devtunnels.ms/oraclecloud/v1/persons/' + id);
   }
 
 }

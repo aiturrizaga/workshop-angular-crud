@@ -4,6 +4,7 @@ import { CustomerLayoutComponent } from './layout/customer-layout/customer-layou
 import { HomePersonComponent } from './feature/person/home-person/home-person.component';
 import { HomeProductComponent } from './feature/product/home-product/home-product.component';
 import { HomeDashboardComponent } from './feature/dashboard/home-dashboard/home-dashboard.component';
+import { SavePersonComponent } from './feature/person/save-person/save-person.component';
 
 export const routes: Routes = [
     {
@@ -17,6 +18,10 @@ export const routes: Routes = [
             {
                 path: 'persons',
                 component: HomePersonComponent
+            },
+            {
+                path: 'persons/register',
+                component: SavePersonComponent
             },
             {
                 path: 'products',

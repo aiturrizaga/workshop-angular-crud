@@ -1,0 +1,54 @@
+
+<!-- bg-red-50 border border-red-500 text-red-900 placeholder-red-700 -->
+<form class="max-w-sm mx-auto" [formGroup]="personForm" (ngSubmit)="register()">
+    <h1 class="text-2xl font-medium mb-2.5">Nueva persona</h1>
+
+    <div class="mb-2.5">
+        <label class="block mb-2 text-sm font-medium text-gray-700">Nombre</label>
+        <input type="text" formControlName="name"
+            class="bg-gray-50 border border-gray-500 text-gray-900 placeholder-gray-700 text-sm rounded-lg block w-full p-2.5">
+        @if (f['name'].dirty && !f['name'].untouched && f['name'].errors) {
+            @if(f['name'].hasError('required')) {
+                <p class="mt-2 text-sm text-red-600"><span class="font-medium">Oops!</span> Debe ingresar el nombre</p>
+            } @else if(f['name'].hasError('minlength')) {
+                <p class="mt-2 text-sm text-red-600"><span class="font-medium">Oops!</span> Minimo 3 caracteres</p>
+            }
+        }
+    </div>
+
+    <div class="mb-2.5">
+        <label class="block mb-2 text-sm font-medium text-gray-700">Apellidos</label>
+        <input type="text" formControlName="lastname"
+            class="bg-gray-50 border border-gray-500 text-gray-900 placeholder-gray-700 text-sm rounded-lg block w-full p-2.5">
+            @if (f['lastname'].dirty && !f['lastname'].untouched && f['lastname'].errors) {
+                @if(f['lastname'].hasError('required')) {
+                    <p class="mt-2 text-sm text-red-600"><span class="font-medium">Oops!</span> Debe ingresar el apellido</p>
+                } @else if(f['lastname'].hasError('minlength')) {
+                    <p class="mt-2 text-sm text-red-600"><span class="font-medium">Oops!</span> Minimo 3 caracteres</p>
+                }
+            }
+    </div>
+
+    <div class="mb-2.5">
+        <label class="block mb-2 text-sm font-medium text-gray-700">Dirección</label>
+        <input type="text" formControlName="address"
+            class="bg-gray-50 border border-gray-500 text-gray-900 placeholder-gray-700 text-sm rounded-lg block w-full p-2.5">
+        @if (false) {
+            <p class="mt-2 text-sm text-red-600"><span class="font-medium">Oops!</span> Debe ingresar el nombre</p>
+        }
+    </div>
+
+    <div class="mb-2.5">
+        <label class="block mb-2 text-sm font-medium text-gray-700">Fecha de nacimiento</label>
+        <input type="text" formControlName="birthday"
+            class="bg-gray-50 border border-gray-500 text-gray-900 placeholder-gray-700 text-sm rounded-lg block w-full p-2.5">
+        @if (false) {
+            <p class="mt-2 text-sm text-red-600"><span class="font-medium">Oops!</span> Debe ingresar el nombre</p>
+        }
+    </div>
+
+    <div class="py-4 flex justify-end gap-4">
+        <button type="button" (click)="navigatePersonList()" class="px-4 py-2.5 bg-gray-100 rounded-lg text-black">Cancelar</button>
+        <button type="submit" class="px-4 py-2.5 bg-black rounded-lg text-white">Registrar</button>
+    </div>
+</form>
