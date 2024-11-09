@@ -2,6 +2,7 @@ import { Component, inject, OnDestroy, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { PersonService } from '@vg/core/services';
+import { finalize } from 'rxjs';
 
 @Component({
   selector: 'app-save-person',
@@ -13,6 +14,7 @@ import { PersonService } from '@vg/core/services';
 export class SavePersonComponent implements OnInit, OnDestroy {
 
   personId!: string;
+  loading: boolean = false;
   personForm: FormGroup = new FormGroup<any>({});
   private fb = inject(FormBuilder);
   private router = inject(Router);
@@ -47,6 +49,7 @@ export class SavePersonComponent implements OnInit, OnDestroy {
   }
 
   savePerson() {
+    console.log('Se ejecuto el evento');
     if (this.personService.selectedPerson) {
       this.update(this.personService.selectedPerson.id)
     } else {
@@ -55,16 +58,22 @@ export class SavePersonComponent implements OnInit, OnDestroy {
   }
 
   register() {
+    this.loading = true;
     console.log(this.personForm.value);
-    this.personService.create(this.personForm.value).subscribe(res => {
-      console.log('Persona:', res);
-      alert('Persona agregada');
-      this.navigatePersonList();
-    });
+    this.personService.create(this.personForm.value)
+      .pipe(finalize(() => this.loading = false))
+      .subscribe(res => {
+        console.log('Persona:', res);
+        alert('Persona agregada');
+        this.navigatePersonList();
+      });
   }
 
   update(personId: string) {
-    this.personService.update(personId, this.personForm.value).subscribe(res => {
+    this.loading = true;
+    this.personService.update(personId, this.personForm.value)
+    .pipe(finalize(() => this.loading = false))
+    .subscribe(res => {
       console.log('Persona:', res);
       alert('Persona actualizada');
       this.navigatePersonList();
@@ -73,10 +82,10 @@ export class SavePersonComponent implements OnInit, OnDestroy {
 
   findPerson(id: string) {
     this.personService.findById(this.personId)
-    .subscribe(person => {
-      this.personService.selectedPerson = person;
-      this.personForm.patchValue(person);
-    });
+      .subscribe(person => {
+        this.personService.selectedPerson = person;
+        this.personForm.patchValue(person);
+      });
   }
 
   navigatePersonList() {
