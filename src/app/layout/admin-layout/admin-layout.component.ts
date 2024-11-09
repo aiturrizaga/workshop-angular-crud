@@ -1,8 +1,6 @@
 import { Component } from '@angular/core';
-import { HeaderComponent } from "../../shared/components/header/header.component";
-import { SidebarComponent } from "../../shared/components/sidebar/sidebar.component";
-import { FooterComponent } from "../../shared/components/footer/footer.component";
 import { RouterOutlet } from '@angular/router';
+import { FooterComponent, HeaderComponent, SidebarComponent } from '@vg/shared/components';
 
 @Component({
   selector: 'app-admin-layout',

@@ -1,8 +1,8 @@
 import { Component, inject, OnInit } from '@angular/core';
-import { PersonService } from '../../../core/services/person.service';
-import { Person } from '../../../core/interfaces/person.interface';
 import { DatePipe } from '@angular/common';
 import { ActivatedRoute, Router } from '@angular/router';
+import { PersonService } from '@vg/core/services';
+import { Person } from '@vg/core/interfaces';
 
 @Component({
   selector: 'app-home-person',
@@ -29,12 +29,12 @@ export class HomePersonComponent implements OnInit {
   }
 
   navigateRegisterPerson() {
-    this.router.navigate(['register'], {relativeTo: this.route}).then();
+    this.router.navigate(['register'], { relativeTo: this.route }).then();
   }
 
   navigateUpdatePerson(person: Person) {
     this.personService.selectedPerson = person;
-    this.router.navigate([person.id], {relativeTo: this.route}).then();
+    this.router.navigate([person.id], { relativeTo: this.route }).then();
   }
 
   deletePerson(id: string) {

@@ -1,7 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { inject, Injectable } from '@angular/core';
-import { Person } from '../interfaces/person.interface';
-import { environment } from '../../../environments/environment';
+import { Person } from '@vg/core/interfaces';
+import { environment } from '@vg/env/environment';
 
 @Injectable({
   providedIn: 'root'

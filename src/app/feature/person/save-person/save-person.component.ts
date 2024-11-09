@@ -1,7 +1,7 @@
 import { Component, inject, OnDestroy, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
-import { PersonService } from '../../../core/services/person.service';
 import { ActivatedRoute, Router } from '@angular/router';
+import { PersonService } from '@vg/core/services';
 
 @Component({
   selector: 'app-save-person',
