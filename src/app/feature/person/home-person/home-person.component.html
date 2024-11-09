@@ -40,7 +40,7 @@
                         {{person.address}}
                     </td>
                     <td class="px-6 py-4">
-                        <button type="button" class="px-4 py-2.5 bg-orange-700 text-white border rounded-lg mx-4">Actualizar</button>
+                        <button type="button" (click)="navigateUpdatePerson(person)" class="px-4 py-2.5 bg-orange-700 text-white border rounded-lg mx-4">Actualizar</button>
                         <button type="button" (click)="deletePerson(person.id)" class="px-4 py-2.5 bg-red-700 text-white border rounded-lg">Eliminar</button>
                     </td>
                 </tr>

@@ -32,6 +32,11 @@ export class HomePersonComponent implements OnInit {
     this.router.navigate(['register'], {relativeTo: this.route}).then();
   }
 
+  navigateUpdatePerson(person: Person) {
+    this.personService.selectedPerson = person;
+    this.router.navigate([person.id], {relativeTo: this.route}).then();
+  }
+
   deletePerson(id: string) {
     const isDelete = confirm('Estas seguro de eliminar');
     if (isDelete) {

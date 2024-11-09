@@ -24,6 +24,10 @@ export const routes: Routes = [
                 component: SavePersonComponent
             },
             {
+                path: 'persons/:id',
+                component: SavePersonComponent
+            },
+            {
                 path: 'products',
                 component: HomeProductComponent
             },

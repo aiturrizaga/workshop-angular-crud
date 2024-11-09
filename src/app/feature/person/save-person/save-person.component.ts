@@ -1,7 +1,7 @@
-import { Component, inject, OnInit } from '@angular/core';
+import { Component, inject, OnDestroy, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
 import { PersonService } from '../../../core/services/person.service';
-import { Router } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 
 @Component({
   selector: 'app-save-person',
@@ -10,12 +10,25 @@ import { Router } from '@angular/router';
   templateUrl: './save-person.component.html',
   styleUrl: './save-person.component.scss'
 })
-export class SavePersonComponent implements OnInit {
+export class SavePersonComponent implements OnInit, OnDestroy {
 
+  personId!: string;
   personForm: FormGroup = new FormGroup<any>({});
   private fb = inject(FormBuilder);
   private router = inject(Router);
-  private personService = inject(PersonService);
+  private route = inject(ActivatedRoute);
+  public personService = inject(PersonService);
+
+  constructor() {
+    if (!this.personService.selectedPerson) {
+      this.route.params.subscribe(param => {
+        this.personId = param['id'];
+        if (this.personId) {
+          this.findPerson(this.personId);
+        }
+      })
+    }
+  }
 
   ngOnInit(): void {
     this.initPersonForm();
@@ -28,6 +41,17 @@ export class SavePersonComponent implements OnInit {
       address: [''],
       birthday: ['']
     });
+    if (this.personService.selectedPerson) {
+      this.personForm.patchValue(this.personService.selectedPerson);
+    }
+  }
+
+  savePerson() {
+    if (this.personService.selectedPerson) {
+      this.update(this.personService.selectedPerson.id)
+    } else {
+      this.register();
+    }
   }
 
   register() {
@@ -39,12 +63,32 @@ export class SavePersonComponent implements OnInit {
     });
   }
 
+  update(personId: string) {
+    this.personService.update(personId, this.personForm.value).subscribe(res => {
+      console.log('Persona:', res);
+      alert('Persona actualizada');
+      this.navigatePersonList();
+    });
+  }
+
+  findPerson(id: string) {
+    this.personService.findById(this.personId)
+    .subscribe(person => {
+      this.personService.selectedPerson = person;
+      this.personForm.patchValue(person);
+    });
+  }
+
   navigatePersonList() {
     this.router.navigate(['/admin/persons']).then();
   }
 
   get f() {
     return this.personForm.controls;
+  }
+
+  ngOnDestroy(): void {
+    this.personService.selectedPerson = null;
   }
 
 }

@@ -1,7 +1,7 @@
 
 <!-- bg-red-50 border border-red-500 text-red-900 placeholder-red-700 -->
-<form class="max-w-sm mx-auto" [formGroup]="personForm" (ngSubmit)="register()">
-    <h1 class="text-2xl font-medium mb-2.5">Nueva persona</h1>
+<form class="max-w-sm mx-auto" [formGroup]="personForm" (ngSubmit)="savePerson()">
+    <h1 class="text-2xl font-medium mb-2.5">{{personService.selectedPerson || this.personId ? 'Actualizar persona' : 'Nueva persona'}}</h1>
 
     <div class="mb-2.5">
         <label class="block mb-2 text-sm font-medium text-gray-700">Nombre</label>
@@ -49,6 +49,8 @@
 
     <div class="py-4 flex justify-end gap-4">
         <button type="button" (click)="navigatePersonList()" class="px-4 py-2.5 bg-gray-100 rounded-lg text-black">Cancelar</button>
-        <button type="submit" class="px-4 py-2.5 bg-black rounded-lg text-white">Registrar</button>
+        <button type="submit" class="px-4 py-2.5 bg-black rounded-lg text-white">
+            {{personService.selectedPerson || this.personId ? 'Actualizar' : 'Registrar'}}
+        </button>
     </div>
 </form>
