@@ -5,6 +5,7 @@ import { HomePersonComponent } from './feature/person/home-person/home-person.co
 import { HomeProductComponent } from './feature/product/home-product/home-product.component';
 import { HomeDashboardComponent } from './feature/dashboard/home-dashboard/home-dashboard.component';
 import { SavePersonComponent } from './feature/person/save-person/save-person.component';
+import { HomeExamComponent } from './feature/exam/home-exam/home-exam.component';
 
 export const routes: Routes = [
     {
@@ -30,6 +31,10 @@ export const routes: Routes = [
             {
                 path: 'products',
                 component: HomeProductComponent
+            },
+            {
+                path: 'exams',
+                component: HomeExamComponent
             },
             {
                 path: '',
