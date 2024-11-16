@@ -6,6 +6,7 @@ import { HomeProductComponent } from './feature/product/home-product/home-produc
 import { HomeDashboardComponent } from './feature/dashboard/home-dashboard/home-dashboard.component';
 import { SavePersonComponent } from './feature/person/save-person/save-person.component';
 import { HomeExamComponent } from './feature/exam/home-exam/home-exam.component';
+import { SaveExamComponent } from './feature/exam/save-exam/save-exam.component';
 
 export const routes: Routes = [
     {
@@ -35,6 +36,10 @@ export const routes: Routes = [
             {
                 path: 'exams',
                 component: HomeExamComponent
+            },
+            {
+                path: 'exams/register',
+                component: SaveExamComponent
             },
             {
                 path: '',
