@@ -12,8 +12,14 @@ export class PersonService {
 
   private http = inject(HttpClient);
 
-  findAll() {
-    return this.http.get<Person[]>(`${environment.apiUrl}/persons`);
+  findAll(type?: string) {
+    let options = {}
+    if (type) {
+      options = {
+        params: {type}
+      }
+    }
+    return this.http.get<Person[]>(`${environment.apiUrl}/persons`, options);
   }
 
   findById(id: string) {

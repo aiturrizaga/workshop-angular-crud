@@ -26,7 +26,7 @@ export class HomePersonComponent implements OnInit {
 
   getPersons() {
     this.loading = true;
-    this.personService.findAll()
+    this.personService.findAll('student')
       .pipe(finalize(() => this.loading = false))
       .subscribe(res => {
         this.persons = res;
