@@ -33,7 +33,8 @@ export class HomeExamComponent implements OnInit {
       .subscribe(res => this.exams = res);
   }
 
-  deleteExam(exam: Exam) {
+  deleteExam(exam: Exam, event: Event) {
+    event.stopPropagation();
     const confirmed = confirm(`¿Estás seguro de que deseas eliminar el examen ${exam.topic}?`);
     if (confirmed) {
       this.examService.delete(exam.id)
@@ -46,6 +47,11 @@ export class HomeExamComponent implements OnInit {
 
   navigateToExamRegister() {
     this.router.navigate(['register'], { relativeTo: this.route }).then();
+  }
+
+  navigateToExamDetail(exam: Exam) {
+    this.examService.selectedExam = exam;
+    this.router.navigate([exam.id], { relativeTo: this.route }).then();
   }
 
 }

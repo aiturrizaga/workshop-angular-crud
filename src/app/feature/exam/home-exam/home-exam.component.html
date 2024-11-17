@@ -34,7 +34,7 @@
         @if (!loading) {
         <tbody>
             @for (exam of exams; track $index) {
-            <tr class="bg-white border-b">
+            <tr class="bg-white border-b cursor-pointer hover:bg-gray-100" (click)="navigateToExamDetail(exam)">
                 <th scope="row" class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap">
                     {{exam.course}}
                 </th>
@@ -65,7 +65,7 @@
                             </svg>
                         </button>
 
-                        <button type="button" (click)="deleteExam(exam)"
+                        <button type="button" (click)="deleteExam(exam, $event)"
                             class="p-2 rounded-full text-gray-600 hover:bg-red-100 hover:text-red-900">
                             <svg class="w-6 h-6" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24"
                                 height="24" fill="none" viewBox="0 0 24 24">

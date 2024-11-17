@@ -9,6 +9,7 @@ import { Exam, ExamDetail, ExamUpdate } from '@vg/core/interfaces';
 export class ExamService {
 
   #http = inject(HttpClient);
+  selectedExam!: Exam | null;
 
   findAll({ active }: { active?: boolean } = {}) {
     let options = {};
@@ -17,7 +18,6 @@ export class ExamService {
         params: {active}
       }
     }
-    console.log(options);
     return this.#http.get<Exam[]>(`${environment.apiUrl}/exams`, options);
   }
 

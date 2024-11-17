@@ -1,4 +1,5 @@
-import { Component, inject, OnInit } from '@angular/core';
+import { DatePipe } from '@angular/common';
+import { Component, inject, OnDestroy, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { Exam, ExamDetail, Person } from '@vg/core/interfaces';
@@ -8,11 +9,11 @@ import { finalize } from 'rxjs';
 @Component({
   selector: 'app-save-exam',
   standalone: true,
-  imports: [ReactiveFormsModule],
+  imports: [ReactiveFormsModule, DatePipe],
   templateUrl: './save-exam.component.html',
   styles: ``
 })
-export class SaveExamComponent implements OnInit {
+export class SaveExamComponent implements OnInit, OnDestroy {
 
   loading: boolean = false;
   teachers: Person[] = [];
@@ -49,6 +50,9 @@ export class SaveExamComponent implements OnInit {
       topic: ['', [Validators.required]],
       course: ['', [Validators.required]]
     });
+    if (this.examService.selectedExam) {
+      this.examForm.patchValue(this.examService.selectedExam);
+    }
   }
 
   initExamDetailForm() {
@@ -57,6 +61,9 @@ export class SaveExamComponent implements OnInit {
       score: [0, [Validators.required]],
       comment: ['', [Validators.required]]
     });
+    if (this.examService.selectedExam && this.examService.selectedExam.details) {
+      this.examDetails = this.examService.selectedExam.details;
+    }
   }
 
   addDetail() {
@@ -93,6 +100,10 @@ export class SaveExamComponent implements OnInit {
 
   compareFn(value: any, option: any): boolean {
     return value.id === option.id;
+  }
+
+  ngOnDestroy(): void {
+    this.examService.selectedExam = null;
   }
 
 }
