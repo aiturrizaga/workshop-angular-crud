@@ -1,5 +1,5 @@
 export interface Exam {
-    id?: string;
+    id: string;
     teacherId: string;
     fullName?: string;
     topic: string;

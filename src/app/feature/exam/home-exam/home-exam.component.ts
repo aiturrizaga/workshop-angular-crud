@@ -28,9 +28,20 @@ export class HomeExamComponent implements OnInit {
 
   getExams() {
     this.loading = true;
-    this.examService.findAll()
+    this.examService.findAll({ active: true })
       .pipe(finalize(() => this.loading = false))
       .subscribe(res => this.exams = res);
+  }
+
+  deleteExam(exam: Exam) {
+    const confirmed = confirm(`¿Estás seguro de que deseas eliminar el examen ${exam.topic}?`);
+    if (confirmed) {
+      this.examService.delete(exam.id)
+        .subscribe(() => {
+          alert(`Examen ${exam.topic} ha sido eliminado`);
+          this.getExams();
+        });
+    }
   }
 
   navigateToExamRegister() {

@@ -42,6 +42,10 @@ export const routes: Routes = [
                 component: SaveExamComponent
             },
             {
+                path: 'exams/:id',
+                component: SaveExamComponent
+            },
+            {
                 path: '',
                 pathMatch: 'full',
                 redirectTo: 'dashboard'

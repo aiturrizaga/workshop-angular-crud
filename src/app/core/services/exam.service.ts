@@ -10,8 +10,15 @@ export class ExamService {
 
   #http = inject(HttpClient);
 
-  findAll() {
-    return this.#http.get<Exam[]>(`${environment.apiUrl}/exams`);
+  findAll({ active }: { active?: boolean } = {}) {
+    let options = {};
+    if (active !== undefined) {
+      options = {
+        params: {active}
+      }
+    }
+    console.log(options);
+    return this.#http.get<Exam[]>(`${environment.apiUrl}/exams`, options);
   }
 
   create(exam: Exam) {
